@@ -45,8 +45,8 @@ jobs:
     - name: Publish Examples Jupyterbook
       run: |
         pip install ghp-import
-        pushd $CLONE_PATH/stuff_pypkg
-        tox -r -e examples,html
+        pushd $CLONE_PATH/examples
+        ghp-import -n -p -f _build/html
         popd
 
     ##-- Archive all documentation products

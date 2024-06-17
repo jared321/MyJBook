@@ -21,7 +21,6 @@ latex_packages = [
     'mathtools',
     'amsfonts', 'amsmath', 'amssymb', 'amsthm'
 ]
-latex_macro_files = ['base', 'notation']
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -30,8 +29,7 @@ latex_macro_files = ['base', 'notation']
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.autosectionlabel',
               'sphinx.ext.todo',
-              'sphinx.ext.mathjax',
-              'sphinxcontrib.bibtex']
+              'sphinx.ext.mathjax']
 numfig = True
 
 # Extensions
@@ -48,8 +46,6 @@ mathjax3_config = {
         'macros': {}
     }
 }
-
-bibtex_bibfiles = ['stuff.bib']
 
 # -- Options for Math --------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-math

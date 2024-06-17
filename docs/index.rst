@@ -19,4 +19,3 @@ non-empty bibliography with at least one cross-reference.
    api
    examples
    developers_guide
-   bibliography
