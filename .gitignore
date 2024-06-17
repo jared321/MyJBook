@@ -1,0 +1,12 @@
+.DS_Store
+
+docs/build_pdf
+docs/build_html
+
+examples/_build
+examples/.ipynb_checkpoints
+
+stuff_pypkg/.coverage
+stuff_pypkg/build
+stuff_pypkg/src/stuff.egg-info
+stuff_pypkg/src/stuff/**/__pycache__

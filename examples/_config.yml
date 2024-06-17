@@ -1,0 +1,9 @@
+title: My sample book
+author: me m. me
+logo: stuff.png
+execute:
+  execute_notebooks: force
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
