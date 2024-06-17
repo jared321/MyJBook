@@ -1,8 +1,6 @@
-name: Build documentation
+name: Build & publish examples
 env:
   CLONE_PATH:    ${{ github.workspace }}
-  PDF_DOCS:      ${{ github.workspace }}/docs/build_pdf
-  HTML_DOCS:     ${{ github.workspace }}/docs/build_html
   EXAMPLES_BOOK: ${{ github.workspace }}/examples/_build
 on:
   push:
@@ -11,11 +9,8 @@ on:
     workflow_dispatch:
 
 jobs:
-  build_docs:
+  build:
     runs-on: ${{ matrix.os }}
-    permissions:
-      pages: write
-      id-token: write
     strategy:
       # We only need to run tools with a single python version.  Ideally
       # this will be the latest version of python used in the action.
@@ -34,14 +29,11 @@ jobs:
     - name: Setup python with tox
       run: ./.github/workflows/setup_tox_github_action.sh
 
-    - name: Install LaTeX
-      run: sudo apt-get install texlive-fonts-recommended texlive-latex-recommended texlive-latex-extra latexmk
-
     ## -- Build all documentation
-    - name: Build examples and Sphinx documentation
+    - name: Build Examples Jupyterbook
       run: |
         pushd $CLONE_PATH/stuff_pypkg
-        tox -r -e examples,html
+        tox -r -e examples
         popd
 
     ##-- Archive all documentation products
@@ -52,14 +44,17 @@ jobs:
         path: |
           ${{ env.EXAMPLES_BOOK }}
 
-#    - name: Archive stuff documentation
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: stuff-docs
-#        path: |
-#          ${{ env.HTML_DOCS }}
-
-    ##-- Publish all documentation
+  ##-- Publish all documentation
+  publish:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
     - name: Publish Examples Jupyterbook
       id: deployment
       uses: actions/deploy-pages@v3
