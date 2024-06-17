@@ -31,13 +31,25 @@ jobs:
     - name: Setup python with tox
       run: ./.github/workflows/setup_tox_github_action.sh
 
-    - name: Build examples
+    - name: Install LaTeX
+      run: sudo apt-get install texlive-fonts-recommended texlive-latex-recommended texlive-latex-extra latexmk
+
+    ## -- Build all documentation
+    - name: Build examples and Sphinx documentation
       run: |
         pushd $CLONE_PATH/stuff_pypkg
         tox -r -e examples,html
         popd
 
-    ##-- Publish sphinx docs
+    ##-- Publish all documentation
+    - name: Publish Examples Jupyterbook
+      run: |
+        pip install ghp-import
+        pushd $CLONE_PATH/stuff_pypkg
+        tox -r -e examples,html
+        popd
+
+    ##-- Archive all documentation products
     - name: Archive stuff examples Jupyterbook
       uses: actions/upload-artifact@v4
       with:
