@@ -13,13 +13,15 @@ on:
 jobs:
   build_docs:
     runs-on: ${{ matrix.os }}
+    permissions:
+      pages: write
+      id-token: write
     strategy:
       # We only need to run tools with a single python version.  Ideally
       # this will be the latest version of python used in the action.
       matrix:
         os: [ubuntu-latest]
-        python-version: ["3.12"]
-    steps:
+        python-version: ["3.12"] steps:
     ##-- General Setup Steps
     - uses: actions/checkout@v4
 
@@ -41,25 +43,22 @@ jobs:
         tox -r -e examples,html
         popd
 
-    ##-- Publish all documentation
-    - name: Publish Examples Jupyterbook
-      run: |
-        pip install ghp-import
-        pushd $CLONE_PATH/examples
-        ghp-import -n -p -f _build/html
-        popd
-
     ##-- Archive all documentation products
     - name: Archive stuff examples Jupyterbook
       uses: actions/upload-artifact@v4
       with:
-        name: stuff-examples
+        name: github-pages
         path: |
           ${{ env.EXAMPLES_BOOK }}
 
-    - name: Archive stuff documentation
-      uses: actions/upload-artifact@v4
-      with:
-        name: stuff-docs
-        path: |
-          ${{ env.HTML_DOCS }}
+#    - name: Archive stuff documentation
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: stuff-docs
+#        path: |
+#          ${{ env.HTML_DOCS }}
+
+    ##-- Publish all documentation
+    - name: Publish Examples Jupyterbook
+      id: deployment
+      uses: actions/deploy-pages@v3
