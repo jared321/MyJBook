@@ -1,7 +1,7 @@
 name: Build & publish examples
 env:
   CLONE_PATH:    ${{ github.workspace }}
-  EXAMPLES_BOOK: ${{ github.workspace }}/examples/_build
+  EXAMPLES_BOOK: ${{ github.workspace }}/examples/_build/html
 on:
   push:
     branches:
@@ -40,7 +40,7 @@ jobs:
     - name: Archive stuff examples Jupyterbook
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ${{ env.EXAMPLES_BOOK }}
+        path: "./examples/_build/html"
 
   ##-- Publish all documentation
   publish:
