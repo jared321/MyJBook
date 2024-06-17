@@ -21,7 +21,8 @@ jobs:
       # this will be the latest version of python used in the action.
       matrix:
         os: [ubuntu-latest]
-        python-version: ["3.12"] steps:
+        python-version: ["3.12"]
+    steps:
     ##-- General Setup Steps
     - uses: actions/checkout@v4
 
