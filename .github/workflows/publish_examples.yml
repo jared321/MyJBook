@@ -10,6 +10,12 @@ on:
 
 jobs:
   build:
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ${{ matrix.os }}
     strategy:
       # We only need to run tools with a single python version.  Ideally
@@ -38,21 +44,11 @@ jobs:
 
     ##-- Archive all documentation products
     - name: Archive stuff examples Jupyterbook
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v2
       with:
-        path: "./examples/_build/html"
+        path: "examples/_build/html"
 
-  ##-- Publish all documentation
-  publish:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
+    ##-- Publish all documentation
     - name: Publish Examples Jupyterbook
       id: deployment
-      uses: actions/deploy-pages@v3
+      uses: actions/deploy-pages@v2
