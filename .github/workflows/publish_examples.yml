@@ -35,7 +35,6 @@ jobs:
       run: |
         pushd $CLONE_PATH/stuff_pypkg
         tox -r -e examples
-        tox -r -e html,pdf
         popd
 
     ##-- Publish sphinx docs
@@ -46,10 +45,10 @@ jobs:
         path: |
           ${{ env.EXAMPLES_BOOK }}
 
-    - name: Archive stuff documentation
-      uses: actions/upload-artifact@v4
-      with:
-        name: stuff-docs
-        path: |
-          ${{ env.PDF_DOCS }}
-          ${{ env.HTML_DOCS }}
+#    - name: Archive stuff documentation
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: stuff-docs
+#        path: |
+#          ${{ env.PDF_DOCS }}
+#          ${{ env.HTML_DOCS }}
