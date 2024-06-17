@@ -38,11 +38,9 @@ jobs:
 
     ##-- Archive all documentation products
     - name: Archive stuff examples Jupyterbook
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-pages-artifact@v3
       with:
-        name: github-pages
-        path: |
-          ${{ env.EXAMPLES_BOOK }}
+        path: ${{ env.EXAMPLES_BOOK }}
 
   ##-- Publish all documentation
   publish:
