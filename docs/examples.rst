@@ -1,4 +1,4 @@
 Examples
 ========
 
-Eventually point to our lovely Jupyterbook
+Please see our lovely `Jupyterbook of examples <https://jared321.github.io/MyJBook>`_.
