@@ -29,7 +29,8 @@ latex_packages = [
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.autosectionlabel',
               'sphinx.ext.todo',
-              'sphinx.ext.mathjax']
+              'sphinx.ext.mathjax',
+              'sphinxcontrib.bibtex']
 numfig = True
 
 # Extensions
@@ -46,6 +47,8 @@ mathjax3_config = {
         'macros': {}
     }
 }
+
+bibtex_bibfiles = ['stuff.bib']
 
 # -- Options for Math --------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-math
